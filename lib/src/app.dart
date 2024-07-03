@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:que_based_ecom_fe/src/routes/home/home.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({
@@ -23,16 +24,17 @@ class MyApp extends StatelessWidget {
       ],
       onGenerateTitle: (BuildContext context) =>
           AppLocalizations.of(context)!.appTitle,
-      theme: ThemeData(),
-      darkTheme: ThemeData.dark(),
-      themeMode: ThemeMode.dark,
-      home: const Scaffold(
-        body: SafeArea(
-          child: Center(
-            child: Text('Let\'s Begin'),
-          ),
+      theme: ThemeData(
+        useMaterial3: true,
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: Colors.pink.shade900,
         ),
       ),
+      darkTheme: ThemeData.dark(
+        useMaterial3: true,
+      ),
+      themeMode: ThemeMode.dark,
+      home: const HomeRoute(),
     );
   }
 }
