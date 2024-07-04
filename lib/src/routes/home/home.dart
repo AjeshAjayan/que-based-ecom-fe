@@ -10,7 +10,7 @@ class HomeRoute extends StatelessWidget {
     Future.delayed(const Duration(seconds: 3), () {
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
-          builder: (context) => const LoginRoute(),
+          builder: (context) => LoginRoute(),
         ),
       );
     });

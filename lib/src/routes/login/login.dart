@@ -1,7 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:que_based_ecom_fe/src/api/send_otp.dart';
 
 class LoginRoute extends StatelessWidget {
-  const LoginRoute({super.key});
+  LoginRoute({super.key});
+
+  final _formKey = GlobalKey<FormState>();
+  final RegExp phoneRegex = RegExp(r'^[6789]\d{9}$');
+  final TextEditingController _textEditingController = TextEditingController();
+
+  void _handleLoginPress(BuildContext context) {
+    if (_formKey.currentState!.validate()) {
+      // call login API
+      sendOTP(_textEditingController.text).then((response) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(response['message']),
+          ),
+        );
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -18,10 +36,32 @@ class LoginRoute extends StatelessWidget {
               children: [
                 SizedBox(
                   width: screenWidth * 0.9,
-                  child: TextFormField(
-                    decoration: const InputDecoration(
-                      label: Text('Phone Number'),
-                      border: OutlineInputBorder(),
+                  child: Form(
+                    key: _formKey,
+                    child: TextFormField(
+                      controller: _textEditingController,
+                      keyboardType: TextInputType.number,
+                      maxLength: 10,
+                      buildCounter: (
+                        BuildContext context, {
+                        int? currentLength,
+                        int? maxLength,
+                        bool? isFocused,
+                      }) {
+                        return null;
+                      },
+                      decoration: const InputDecoration(
+                        label: Text('Phone Number'),
+                        border: OutlineInputBorder(),
+                      ),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter a phone number';
+                        } else if (!phoneRegex.hasMatch(value)) {
+                          return 'Phone Number is invalid';
+                        }
+                        return null;
+                      },
                     ),
                   ),
                 ),
@@ -29,7 +69,7 @@ class LoginRoute extends StatelessWidget {
             ),
             const SizedBox(height: 10),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () => _handleLoginPress(context),
               child: const Text('Login'),
             ),
           ],
