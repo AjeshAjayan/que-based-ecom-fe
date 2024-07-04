@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:que_based_ecom_fe/src/api/send_otp.dart';
+import 'package:que_based_ecom_fe/src/routes/login/verify_otp.dart';
 
 class LoginRoute extends StatelessWidget {
   LoginRoute({super.key});
@@ -17,8 +18,19 @@ class LoginRoute extends StatelessWidget {
             content: Text(response['message']),
           ),
         );
+        _gotoVerifyOTP(context);
       });
     }
+  }
+
+  void _gotoVerifyOTP(BuildContext context) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => VerifyOTPRoute(
+          phoneNumber: _textEditingController.text,
+        ),
+      ),
+    );
   }
 
   @override

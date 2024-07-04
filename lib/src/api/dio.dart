@@ -1,8 +1,6 @@
-import 'dart:async';
-
 import 'package:dio/dio.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:que_based_ecom_fe/src/constants.dart';
+import 'package:que_based_ecom_fe/src/utils/get_token_from_secure_storage.dart';
 
 class DioClient {
   final _actualDio = Dio();
@@ -20,7 +18,7 @@ class DioClient {
           (RequestOptions options, RequestInterceptorHandler handler) {
         // add authentication token to request header
         options.headers['Authorization'] =
-            'Bearer $_getTokenFromSecureStorage()';
+            'Bearer $getTokenFromSecureStorage()';
         return handler.next(options);
       }, onResponse: (Response response, ResponseInterceptorHandler handler) {
         return handler.next(response);
@@ -30,11 +28,6 @@ class DioClient {
     );
     _actualDio.interceptors.add(LogInterceptor(responseBody: true));
     _actualDio.interceptors.add(LogInterceptor(requestBody: true));
-  }
-
-  Future<String?> _getTokenFromSecureStorage() async {
-    const storage = FlutterSecureStorage();
-    return storage.read(key: 'token');
   }
 
   Dio get dio => _actualDio;
