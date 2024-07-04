@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:que_based_ecom_fe/src/routes/login/login.dart';
-import 'package:que_based_ecom_fe/src/widgets/QNavigationBar.dart';
+import 'package:que_based_ecom_fe/src/widgets/q_navigation_bar.dart';
 
 class HomeRoute extends StatelessWidget {
   const HomeRoute({super.key});

@@ -10,10 +10,12 @@ environment:
   sdk: '>=3.4.3 <4.0.0'
 
 dependencies:
+  dio: ^5.5.0
   flutter:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
+  flutter_secure_storage: ^9.2.2
   june: ^1.0.0+1
 
 dev_dependencies:
