@@ -11,7 +11,7 @@ class _QNavigationBarState extends State<QNavigationBar> {
   @override
   Widget build(BuildContext context) {
     return NavigationBar(
-      labelBehavior: NavigationDestinationLabelBehavior.alwaysHide,
+      labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
       destinations: const <Widget>[
         NavigationDestination(
           selectedIcon: Icon(Icons.home),
@@ -19,15 +19,21 @@ class _QNavigationBarState extends State<QNavigationBar> {
           label: 'Home',
         ),
         NavigationDestination(
-          icon: Badge(child: Icon(Icons.notifications_sharp)),
-          label: 'Notifications',
+          icon: Badge(child: Icon(Icons.local_shipping_outlined)),
+          label: 'Orders',
         ),
         NavigationDestination(
           icon: Badge(
             label: Text('2'),
-            child: Icon(Icons.messenger_sharp),
+            child: Icon(Icons.currency_rupee_outlined),
           ),
-          label: 'Messages',
+          label: 'My Trade',
+        ),
+        NavigationDestination(
+          icon: Badge(
+            child: Icon(Icons.person_2_outlined),
+          ),
+          label: 'Profile',
         ),
       ],
     );
