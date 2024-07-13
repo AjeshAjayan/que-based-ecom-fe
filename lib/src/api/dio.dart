@@ -9,6 +9,7 @@ class DioClient {
     _actualDio.options.baseUrl = baseUrl;
     _actualDio.options.connectTimeout = const Duration(seconds: 3);
     _actualDio.options.receiveTimeout = const Duration(seconds: 3);
+    _actualDio.options.headers['Content-Type'] = 'application/json';
     _addInterceptors();
   }
 

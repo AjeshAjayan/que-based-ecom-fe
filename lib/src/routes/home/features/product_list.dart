@@ -17,7 +17,7 @@ class _ProductListState extends State<ProductList> {
       future: productsFuture,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
-          final listCount = snapshot.data?.products.length ?? 0;
+          final listCount = snapshot.data?.products?.totalDocs ?? 0;
 
           if (listCount == 0) {
             return const Center(
@@ -26,16 +26,17 @@ class _ProductListState extends State<ProductList> {
           }
 
           return ListView.builder(
-            itemCount: snapshot.data?.products.length ?? 0,
+            itemCount: listCount,
             itemBuilder: (context, index) {
               return ListTile(
-                title: Text(snapshot.data?.products[index].title ?? 'No Title'),
+                title: Text(
+                    snapshot.data?.products?.docs[index].title ?? 'No Title'),
                 subtitle: const Text('description'),
               );
             },
           );
         } else {
-          return Center(child: const CircularProgressIndicator());
+          return const Center(child: CircularProgressIndicator());
         }
       },
     );
