@@ -14,7 +14,7 @@ class HomeRoute extends StatelessWidget {
         body: SafeArea(
           child: Container(
             padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-            child: Column(
+            child: const Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Expanded(
