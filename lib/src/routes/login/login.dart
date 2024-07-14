@@ -12,7 +12,7 @@ class LoginRoute extends StatelessWidget {
   void _handleLoginPress(BuildContext context) {
     if (_formKey.currentState!.validate()) {
       // call login API
-      sendOTP(_textEditingController.text).then((response) {
+      sendOTP(_textEditingController.text, context).then((response) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(response['message']),

@@ -1,11 +1,14 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 import 'package:que_based_ecom_fe/src/constants.dart';
+import 'package:que_based_ecom_fe/src/routes/error/q_error.dart';
 import 'package:que_based_ecom_fe/src/utils/get_token_from_secure_storage.dart';
 
 class DioClient {
   final _actualDio = Dio();
+  BuildContext buildContext;
 
-  DioClient() {
+  DioClient(this.buildContext) {
     _actualDio.options.baseUrl = baseUrl;
     _actualDio.options.connectTimeout = const Duration(seconds: 3);
     _actualDio.options.receiveTimeout = const Duration(seconds: 3);
@@ -24,6 +27,11 @@ class DioClient {
       }, onResponse: (Response response, ResponseInterceptorHandler handler) {
         return handler.next(response);
       }, onError: (DioException exception, ErrorInterceptorHandler handler) {
+        Navigator.of(buildContext).push(MaterialPageRoute(
+          builder: (context) => QError(
+              subMessage: exception.message ?? '',
+              message: (exception.error as dynamic).message),
+        ));
         return handler.next(exception);
       }),
     );

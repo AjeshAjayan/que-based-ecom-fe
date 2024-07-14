@@ -23,7 +23,7 @@ class VerifyOTPRoute extends StatelessWidget {
      * request OTP verification.
      * goto Registration or Home with respect to the response
      */
-    verifyOTP(otp, phoneNumber).then((response) {
+    verifyOTP(otp, phoneNumber, context).then((response) {
       /**
        * save token to secure storage
        * null token will be wrote in case of API error

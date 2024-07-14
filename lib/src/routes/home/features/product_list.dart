@@ -1,5 +1,9 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:que_based_ecom_fe/src/api/get_all_products.dart';
+
+import '../../../model/paginated.dart';
+import '../../../model/product.dart';
 
 class ProductList extends StatefulWidget {
   const ProductList({super.key});
@@ -9,7 +13,13 @@ class ProductList extends StatefulWidget {
 }
 
 class _ProductListState extends State<ProductList> {
-  final productsFuture = getAllProducts();
+  late Future<Response<Paginated<Product>>> productsFuture;
+
+  @override
+  void initState() {
+    productsFuture = getAllProducts(context);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
