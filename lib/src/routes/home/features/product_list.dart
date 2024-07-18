@@ -38,10 +38,22 @@ class _ProductListState extends State<ProductList> {
           return ListView.builder(
             itemCount: listCount,
             itemBuilder: (context, index) {
-              return ListTile(
-                title:
-                    Text(snapshot.data?.data?.docs[index].title ?? 'No Title'),
-                subtitle: const Text('description'),
+              return Card.outlined(
+                child: Container(
+                    padding: const EdgeInsets.all(10),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Placeholder(),
+                        Text(
+                          style: const TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          snapshot.data?.data?.docs[index].title ?? 'No Title',
+                        )
+                      ],
+                    )),
               );
             },
           );
