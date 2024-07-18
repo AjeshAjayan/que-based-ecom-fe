@@ -64,3 +64,8 @@ class _ProductListState extends State<ProductList> {
     );
   }
 }
+
+// TODO: complete product model, get all relavent details from API
+// TODO: integrate to home page
+// TODO: implement tabs
+// TODO: navigate to detail page
