@@ -1,5 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:que_based_ecom_fe/src/model/payload_description/payload_description.dart';
 import 'package:que_based_ecom_fe/src/model/product_image/product_image.dart';
+import 'package:que_based_ecom_fe/src/model/product_variants/product_variants.dart';
 import 'package:que_based_ecom_fe/src/model/product_video/product_video.dart';
 import 'package:que_based_ecom_fe/src/model/sub_category/sub_category.dart';
 
@@ -34,6 +36,8 @@ class Product {
   final List<ProductImage>? images;
   final List<ProductVideo>? videos;
   final List<SubCategory> subCategory;
+  final List<PayloadDescription>? description;
+  final List<ProductVariants>? variants;
 
   Product({
     required this.title,
@@ -62,6 +66,8 @@ class Product {
     required this.images,
     this.videos,
     required this.subCategory,
+    this.description,
+    this.variants,
   });
 
   factory Product.fromJSON(Map<String, dynamic> json) =>
