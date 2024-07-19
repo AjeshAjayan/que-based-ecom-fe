@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:que_based_ecom_fe/src/api/dio.dart';
-import 'package:que_based_ecom_fe/src/model/paginated.dart';
-import 'package:que_based_ecom_fe/src/model/product.dart';
+import 'package:que_based_ecom_fe/src/model/paginated/paginated.dart';
+import 'package:que_based_ecom_fe/src/model/product/product.dart';
 
 Future<Response<Paginated<Product>>> getAllProducts(
   BuildContext buildContext,
@@ -14,7 +14,14 @@ Future<Response<Paginated<Product>>> getAllProducts(
     Paginated<Product>? paginatedProducts =
         Paginated.fromJSON(response.data, (object) {
       dynamic data = object;
-      return Product(data?['title']);
+      return Product(
+        title: data?['title'],
+        price: data?['price'],
+        id: data?['id'],
+        moq: data?['moq'],
+        productAddedDate: data?['productAddedDate'],
+        images: [],
+      );
     });
 
     Response<Paginated<Product>> responseWithPaginatedProducts =

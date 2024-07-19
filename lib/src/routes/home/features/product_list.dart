@@ -2,8 +2,8 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:que_based_ecom_fe/src/api/get_all_products.dart';
 
-import '../../../model/paginated.dart';
-import '../../../model/product.dart';
+import '../../../model/paginated/paginated.dart';
+import '../../../model/product/product.dart';
 
 class ProductList extends StatefulWidget {
   const ProductList({super.key});
