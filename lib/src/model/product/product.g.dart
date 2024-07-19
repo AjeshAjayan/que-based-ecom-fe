@@ -30,11 +30,14 @@ Product _$ProductFromJson(Map<String, dynamic> json) => Product(
       isBestSeller: json['isBestSeller'] as bool?,
       createdAt: json['createdAt'] as String?,
       updatedAt: json['updatedAt'] as String?,
-      images: (json['images'] as List<dynamic>)
-          .map((e) => ProductImage.fromJson(e as Map<String, dynamic>))
+      images: (json['images'] as List<dynamic>?)
+          ?.map((e) => ProductImage.fromJson(e as Map<String, dynamic>))
           .toList(),
       videos: (json['videos'] as List<dynamic>?)
           ?.map((e) => ProductVideo.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      subCategory: (json['subCategory'] as List<dynamic>)
+          .map((e) => SubCategory.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
@@ -64,4 +67,5 @@ Map<String, dynamic> _$ProductToJson(Product instance) => <String, dynamic>{
       'updatedAt': instance.updatedAt,
       'images': instance.images,
       'videos': instance.videos,
+      'subCategory': instance.subCategory,
     };

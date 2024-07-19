@@ -21,6 +21,7 @@ Future<Response<Paginated<Product>>> getAllProducts(
         moq: data?['moq'],
         productAddedDate: data?['productAddedDate'],
         images: [],
+        subCategory: [],
       );
     });
 
