@@ -1,9 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:que_based_ecom_fe/src/model/images_and_videos/images_and_videos.dart';
 import 'package:que_based_ecom_fe/src/model/payload_description/payload_description.dart';
-import 'package:que_based_ecom_fe/src/model/product_image/product_image.dart';
 import 'package:que_based_ecom_fe/src/model/product_variants/product_variants.dart';
-import 'package:que_based_ecom_fe/src/model/product_video/product_video.dart';
 import 'package:que_based_ecom_fe/src/model/sub_category/sub_category.dart';
 
 part 'product.g.dart';

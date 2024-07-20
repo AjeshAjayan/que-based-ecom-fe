@@ -29,5 +29,10 @@ To support additional languages, please visit the tutorial on
 [Internationalizing Flutter
 apps](https://flutter.dev/docs/development/accessibility-and-localization/internationalization)
 
-TODO:
+TODO - After MVP:
+play button overlay for video
 soft delete
+infinite scroll with pagination
+play video when the video tag in on view
+mute button to mute video
+search product
