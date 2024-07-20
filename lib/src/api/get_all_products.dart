@@ -14,15 +14,8 @@ Future<Response<Paginated<Product>>> getAllProducts(
     Paginated<Product>? paginatedProducts =
         Paginated.fromJSON(response.data, (object) {
       dynamic data = object;
-      return Product(
-        title: data?['title'],
-        price: data?['price'],
-        id: data?['id'],
-        moq: data?['moq'],
-        productAddedDate: data?['productAddedDate'],
-        imagesAndVideos: [],
-        subCategory: [],
-      );
+      final product = Product.fromJson(data);
+      return Product.fromJson(data);
     });
 
     Response<Paginated<Product>> responseWithPaginatedProducts =

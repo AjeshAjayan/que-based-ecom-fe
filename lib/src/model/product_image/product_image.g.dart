@@ -8,7 +8,7 @@ part of 'product_image.dart';
 
 ProductImage _$ProductImageFromJson(Map<String, dynamic> json) => ProductImage(
       id: json['id'] as String,
-      altText: json['altText'] as String,
+      altText: json['altText'] as String?,
       filename: json['filename'] as String,
       mimeType: json['mimeType'] as String,
       filesize: (json['filesize'] as num).toInt(),

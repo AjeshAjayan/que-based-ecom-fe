@@ -11,7 +11,7 @@ ProductVariants _$ProductVariantsFromJson(Map<String, dynamic> json) =>
       id: json['id'] as String,
       size: json['size'] == null ? null : Size.fromJson(json['size']),
       quantity: (json['quantity'] as num).toInt(),
-      color: json['color'] == null ? null : Color.fromJson(json['color']),
+      color: (json['color'] as List<dynamic>?)?.map(Color.fromJson).toList(),
       colorTextToDisplay: json['colorTextToDisplay'] as String?,
       materials: (json['materials'] as List<dynamic>?)
           ?.map(Material.fromJson)

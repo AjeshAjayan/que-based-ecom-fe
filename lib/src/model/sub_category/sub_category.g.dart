@@ -11,10 +11,9 @@ SubCategory _$SubCategoryFromJson(Map<String, dynamic> json) => SubCategory(
       name: json['name'] as String,
       createdAt: json['createdAt'] as String?,
       updatedAt: json['updatedAt'] as String?,
-      description: json['description'] == null
-          ? null
-          : PayloadDescription.fromJson(
-              json['description'] as Map<String, dynamic>),
+      description: (json['description'] as List<dynamic>?)
+          ?.map((e) => PayloadDescription.fromJson(e as Map<String, dynamic>))
+          .toList(),
       category: json['category'] == null
           ? null
           : Category.fromJson(json['category'] as Map<String, dynamic>),

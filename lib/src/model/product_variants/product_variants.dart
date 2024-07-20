@@ -13,7 +13,7 @@ class ProductVariants {
   final String id;
   final Size? size;
   final int quantity;
-  final Color? color;
+  final List<Color>? color;
   final String? colorTextToDisplay;
   final List<Material>? materials;
   final List<ImagesAndVideos> imagesAndVideos;

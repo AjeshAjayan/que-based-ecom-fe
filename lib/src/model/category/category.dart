@@ -7,7 +7,7 @@ part 'category.g.dart';
 class Category {
   final String id;
   final String name;
-  final PayloadDescription? description;
+  final List<PayloadDescription>? description;
   final String? createdAt;
   final String? updatedAt;
 

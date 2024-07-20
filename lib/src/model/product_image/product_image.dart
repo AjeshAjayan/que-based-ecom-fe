@@ -5,7 +5,7 @@ part 'product_image.g.dart';
 @JsonSerializable()
 class ProductImage {
   final String id;
-  final String altText;
+  final String? altText;
   final String filename;
   final String mimeType;
   final int filesize;

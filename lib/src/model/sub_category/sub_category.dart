@@ -11,7 +11,7 @@ class SubCategory {
   final String? createdAt;
   final String? updatedAt;
 
-  final PayloadDescription? description;
+  final List<PayloadDescription>? description;
   final Category? category;
 
   SubCategory({

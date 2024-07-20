@@ -11,6 +11,7 @@ environment:
 
 dependencies:
   carousel_slider: ^4.2.1
+  chewie: ^1.8.1
   dio: ^5.5.0
   flutter:
     sdk: flutter
@@ -20,6 +21,7 @@ dependencies:
   flutter_secure_storage: ^9.2.2
   json_annotation: ^4.9.0
   june: ^1.0.0+1
+  video_player: ^2.9.1
 
 dev_dependencies:
   flutter_test:

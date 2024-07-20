@@ -7,7 +7,7 @@ part 'size.g.dart';
 class Size {
   final String id;
   final String name;
-  final PayloadDescription? description;
+  final List<PayloadDescription>? description;
   final String? createdAt;
   final String? updatedAt;
 

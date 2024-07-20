@@ -69,7 +69,7 @@ class Product {
     this.variants,
   });
 
-  factory Product.fromJSON(Map<String, dynamic> json) =>
+  factory Product.fromJson(Map<String, dynamic> json) =>
       _$ProductFromJson(json);
 
   Map<String, dynamic> toJSON() => _$ProductToJson(this);

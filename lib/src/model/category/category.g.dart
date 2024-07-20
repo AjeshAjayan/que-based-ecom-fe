@@ -9,10 +9,9 @@ part of 'category.dart';
 Category _$CategoryFromJson(Map<String, dynamic> json) => Category(
       id: json['id'] as String,
       name: json['name'] as String,
-      description: json['description'] == null
-          ? null
-          : PayloadDescription.fromJson(
-              json['description'] as Map<String, dynamic>),
+      description: (json['description'] as List<dynamic>?)
+          ?.map((e) => PayloadDescription.fromJson(e as Map<String, dynamic>))
+          .toList(),
       createdAt: json['createdAt'] as String?,
       updatedAt: json['updatedAt'] as String?,
     );
