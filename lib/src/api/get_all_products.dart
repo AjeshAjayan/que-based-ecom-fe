@@ -20,7 +20,7 @@ Future<Response<Paginated<Product>>> getAllProducts(
         id: data?['id'],
         moq: data?['moq'],
         productAddedDate: data?['productAddedDate'],
-        images: [],
+        imagesAndVideos: [],
         subCategory: [],
       );
     });

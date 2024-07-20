@@ -1,5 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:que_based_ecom_fe/src/model/color/color.dart';
+import 'package:que_based_ecom_fe/src/model/images_and_videos/images_and_videos.dart';
 import 'package:que_based_ecom_fe/src/model/material/material.dart';
 import 'package:que_based_ecom_fe/src/model/product_image/product_image.dart';
 import 'package:que_based_ecom_fe/src/model/product_video/product_video.dart';
@@ -15,8 +16,7 @@ class ProductVariants {
   final Color? color;
   final String? colorTextToDisplay;
   final List<Material>? materials;
-  final ProductImage? images;
-  final ProductVideo? videos;
+  final List<ImagesAndVideos> imagesAndVideos;
   final bool? isOutOfStock;
   final bool? isSoldOut;
   final bool? isComingSoon;
@@ -30,8 +30,7 @@ class ProductVariants {
     this.color,
     this.colorTextToDisplay,
     this.materials,
-    this.images,
-    this.videos,
+    required this.imagesAndVideos,
     this.isOutOfStock,
     this.isSoldOut,
     this.isComingSoon,

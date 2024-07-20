@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:que_based_ecom_fe/src/model/images_and_videos/images_and_videos.dart';
 import 'package:que_based_ecom_fe/src/model/payload_description/payload_description.dart';
 import 'package:que_based_ecom_fe/src/model/product_image/product_image.dart';
 import 'package:que_based_ecom_fe/src/model/product_variants/product_variants.dart';
@@ -33,8 +34,7 @@ class Product {
   final String? createdAt;
   final String? updatedAt;
 
-  final List<ProductImage>? images;
-  final List<ProductVideo>? videos;
+  final List<ImagesAndVideos> imagesAndVideos;
   final List<SubCategory> subCategory;
   final List<PayloadDescription>? description;
   final List<ProductVariants>? variants;
@@ -63,8 +63,7 @@ class Product {
     this.isBestSeller,
     this.createdAt,
     this.updatedAt,
-    required this.images,
-    this.videos,
+    required this.imagesAndVideos,
     required this.subCategory,
     this.description,
     this.variants,
