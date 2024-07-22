@@ -4,14 +4,14 @@ import 'package:que_based_ecom_fe/src/api/dio.dart';
 import 'package:que_based_ecom_fe/src/model/paginated/paginated.dart';
 import 'package:que_based_ecom_fe/src/model/product/product.dart';
 
-Future<Response<Paginated<Product>>> getAllProducts(
+Future<Response<Paginated<Product>>> getAllMOQ1Products(
   BuildContext buildContext,
 ) async {
   try {
     final dioClient = DioClient(buildContext);
 
-    final response = await dioClient.dio
-        .get('api/products?where[moq][greater_than]=1&depth=6');
+    final response =
+        await dioClient.dio.get('api/products?where[moq][equals]=1');
     Paginated<Product>? paginatedProducts =
         Paginated.fromJSON(response.data, (object) {
       dynamic data = object;
