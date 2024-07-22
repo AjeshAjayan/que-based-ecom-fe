@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:june/june.dart';
-import 'package:que_based_ecom_fe/src/routes/home/features/product_list.dart';
+import 'package:que_based_ecom_fe/src/routes/home/features/product_list/product_list.dart';
 import 'package:que_based_ecom_fe/src/routes/home/home_store.dart';
 import 'package:que_based_ecom_fe/src/widgets/q_navigation_bar.dart';
 
