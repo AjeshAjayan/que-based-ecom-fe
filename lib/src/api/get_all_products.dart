@@ -4,9 +4,11 @@ import 'package:que_based_ecom_fe/src/api/dio.dart';
 import 'package:que_based_ecom_fe/src/model/paginated/paginated.dart';
 import 'package:que_based_ecom_fe/src/model/product/product.dart';
 
-Future<Response<Paginated<Product>>> getAllProducts(
-  BuildContext buildContext,
-) async {
+typedef OnCompleteFunction = void Function(
+    Response<Paginated<Product>> responseWithPaginatedProducts);
+
+Future<Response<Paginated<Product>>> getAllProducts(BuildContext buildContext,
+    {OnCompleteFunction? onComplete}) async {
   try {
     final dioClient = DioClient(buildContext);
 
@@ -23,6 +25,9 @@ Future<Response<Paginated<Product>>> getAllProducts(
       data: paginatedProducts,
       requestOptions: response.requestOptions,
     );
+    if (onComplete != null) {
+      onComplete(responseWithPaginatedProducts);
+    }
     return responseWithPaginatedProducts;
   } catch (e) {
     rethrow;
