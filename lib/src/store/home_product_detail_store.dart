@@ -1,6 +1,6 @@
 import 'package:june/june.dart';
 
-class HomeStore extends JuneState {
+class HomeProductDetailStore extends JuneState {
   bool isShop = false;
 
   void toggleIsShop(bool value) {

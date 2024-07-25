@@ -3,7 +3,7 @@ import 'package:june/june.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:que_based_ecom_fe/src/api/get_all_moq_1_products.dart';
 import 'package:que_based_ecom_fe/src/api/get_all_products.dart';
-import 'package:que_based_ecom_fe/src/routes/home/home_store.dart';
+import 'package:que_based_ecom_fe/src/store/home_product_detail_store.dart';
 import 'package:que_based_ecom_fe/src/widgets/q_product_media_carousel.dart';
 
 import '../../../../model/product/product.dart';
@@ -66,7 +66,7 @@ class _ProductListState extends State<ProductList> {
 
   @override
   Widget build(BuildContext context) {
-    return JuneBuilder(() => HomeStore(), builder: (state) {
+    return JuneBuilder(() => HomeProductDetailStore(), builder: (state) {
       return FutureBuilder(
         future: state.isShop
             ? getAllMOQ1Products(context)

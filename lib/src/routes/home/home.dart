@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:june/june.dart';
 import 'package:que_based_ecom_fe/src/routes/home/features/product_list/product_list.dart';
-import 'package:que_based_ecom_fe/src/routes/home/home_store.dart';
+import 'package:que_based_ecom_fe/src/store/home_product_detail_store.dart';
 import 'package:que_based_ecom_fe/src/widgets/q_navigation_bar.dart';
 
 class HomeRoute extends StatelessWidget {
   const HomeRoute({super.key});
 
   void shopOrWarehouseSwitchOnChanged(bool value) {
-    HomeStore state = June.getState(() => HomeStore());
+    HomeProductDetailStore state =
+        June.getState(() => HomeProductDetailStore());
     state.toggleIsShop(value);
   }
 
@@ -21,7 +22,7 @@ class HomeRoute extends StatelessWidget {
             Container(
               margin: const EdgeInsets.only(right: 15),
               child: JuneBuilder(
-                () => HomeStore(),
+                () => HomeProductDetailStore(),
                 builder: (state) => Row(
                   children: [
                     Switch(
