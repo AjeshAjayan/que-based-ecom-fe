@@ -27,11 +27,16 @@ class DioClient {
       }, onResponse: (Response response, ResponseInterceptorHandler handler) {
         return handler.next(response);
       }, onError: (DioException exception, ErrorInterceptorHandler handler) {
-        Navigator.of(buildContext).push(MaterialPageRoute(
-          builder: (context) => QError(
-              subMessage: exception.message ?? '',
-              message: (exception.error as dynamic).message),
-        ));
+        Navigator.of(buildContext).push(
+          MaterialPageRoute(
+            builder: (context) => QError(
+              subMessage: exception.message ?? 'Error',
+              message: exception.error != null
+                  ? (exception.error as dynamic).message
+                  : '',
+            ),
+          ),
+        );
         return handler.next(exception);
       }),
     );
