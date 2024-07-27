@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:que_based_ecom_fe/src/api/verify_otp.dart';
 import 'package:que_based_ecom_fe/src/routes/home/home.dart';
-import 'package:que_based_ecom_fe/src/routes/login/register.dart';
+import 'package:que_based_ecom_fe/src/routes/register/register.dart';
 import 'package:que_based_ecom_fe/src/utils/write_token_to_secure_storage.dart';
 import 'package:que_based_ecom_fe/src/widgets/q_otp_fields.dart';
 
@@ -32,8 +33,7 @@ class VerifyOTPRoute extends StatelessWidget {
 
       if (response.statusCode == 200) {
         // Already registered
-        Navigator.of(context).pushReplacement(
-            MaterialPageRoute(builder: (context) => const HomeRoute()));
+        context.go('/home');
       } else if (response.statusCode == 201) {
         // OTP verified
         Navigator.of(context).pushReplacement(

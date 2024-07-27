@@ -1,57 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:june/june.dart';
+import 'package:que_based_ecom_fe/src/routes/home/features/home_app_bar.dart';
 import 'package:que_based_ecom_fe/src/routes/home/features/product_list/product_list.dart';
-import 'package:que_based_ecom_fe/src/store/home_product_detail_store.dart';
-import 'package:que_based_ecom_fe/src/widgets/q_navigation_bar.dart';
 
-class HomeRoute extends StatelessWidget {
-  const HomeRoute({super.key});
+class HomeScreen extends StatelessWidget {
+  HomeScreen({super.key});
 
-  void shopOrWarehouseSwitchOnChanged(bool value) {
-    HomeProductDetailStore state =
-        June.getState(() => HomeProductDetailStore());
-    state.toggleIsShop(value);
-  }
+  final appBar = HomeAppBar();
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: const Text('Products'),
-          actions: [
-            Container(
-              margin: const EdgeInsets.only(right: 15),
-              child: JuneBuilder(
-                () => HomeProductDetailStore(),
-                builder: (state) => Row(
-                  children: [
-                    Switch(
-                      value: state.isShop,
-                      onChanged: shopOrWarehouseSwitchOnChanged,
-                      inactiveTrackColor: Colors.pink.shade900,
-                      thumbColor: WidgetStateProperty.all(Colors.black),
-                      activeColor: Colors.greenAccent,
-                    ),
-                    Icon(state.isShop ? Icons.store : Icons.warehouse),
-                  ],
-                ),
-              ),
-            )
-          ],
-        ),
-        body: SafeArea(
-          child: Container(
-            padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-            child: const Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Expanded(
-                  child: ProductList(),
-                ),
-                QNavigationBar()
-              ],
-            ),
-          ),
-        ));
+    return const ProductList();
   }
 }

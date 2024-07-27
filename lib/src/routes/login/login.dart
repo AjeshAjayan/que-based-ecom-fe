@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:que_based_ecom_fe/src/api/send_otp.dart';
-import 'package:que_based_ecom_fe/src/routes/login/verify_otp.dart';
+import 'package:que_based_ecom_fe/src/routes/verify_otp/verify_otp.dart';
 
 class LoginRoute extends StatelessWidget {
   LoginRoute({super.key});
@@ -24,13 +25,7 @@ class LoginRoute extends StatelessWidget {
   }
 
   void _gotoVerifyOTP(BuildContext context) {
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) => VerifyOTPRoute(
-          phoneNumber: _textEditingController.text,
-        ),
-      ),
-    );
+    context.go('/verify-otp/${_textEditingController.text}');
   }
 
   @override
