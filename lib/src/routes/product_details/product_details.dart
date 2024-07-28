@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:june/june.dart';
 import 'package:que_based_ecom_fe/src/store/home_product_detail_store.dart';
-import 'package:que_based_ecom_fe/src/widgets/q_navigation_bar.dart';
 
-class ProductDetailsRoute extends StatefulWidget {
-  const ProductDetailsRoute({super.key});
+class ProductDetailsScreen extends StatefulWidget {
+  const ProductDetailsScreen({super.key});
 
   @override
-  State<ProductDetailsRoute> createState() => _ProductDetailsRouteState();
+  State<ProductDetailsScreen> createState() => _ProductDetailsScreenState();
 }
 
-class _ProductDetailsRouteState extends State<ProductDetailsRoute> {
+class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   @override
   void dispose() {
     /**
@@ -24,31 +23,19 @@ class _ProductDetailsRouteState extends State<ProductDetailsRoute> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: const Color(0x00000000),
-      ),
-      body: SafeArea(
-        child: Column(
-          children: [
-            Expanded(
-              child:
-                  JuneBuilder(() => HomeProductDetailStore(), builder: (state) {
-                if (state.selectedProduct != null) {
-                  final selectedProduct = state.selectedProduct!;
+    return JuneBuilder(
+      () => HomeProductDetailStore(),
+      builder: (state) {
+        if (state.selectedProduct != null) {
+          final selectedProduct = state.selectedProduct!;
 
-                  return Center(
-                    child: Text(selectedProduct.title),
-                  );
-                }
+          return Center(
+            child: Text(selectedProduct.title),
+          );
+        }
 
-                return const Center(child: Text('Ops, something went wrong'));
-              }),
-            ),
-            const QNavigationBar(),
-          ],
-        ),
-      ),
+        return const Center(child: Text('Ops, something went wrong'));
+      },
     );
   }
 }

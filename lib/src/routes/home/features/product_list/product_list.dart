@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:june/june.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:que_based_ecom_fe/src/api/get_all_moq_1_products.dart';
 import 'package:que_based_ecom_fe/src/api/get_all_products.dart';
-import 'package:que_based_ecom_fe/src/routes/product_details/product_details.dart';
 import 'package:que_based_ecom_fe/src/store/home_product_detail_store.dart';
 import 'package:que_based_ecom_fe/src/widgets/q_product_media_carousel.dart';
 
@@ -82,12 +82,7 @@ class _ProductListState extends State<ProductList> {
   void _handleProductOnTap(Product product) {
     _updateSelectedProduct(product);
 
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => const ProductDetailsRoute(),
-      ),
-    );
+    context.push('/home/product-details');
   }
 
   @override

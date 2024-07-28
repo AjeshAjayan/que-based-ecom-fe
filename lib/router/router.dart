@@ -11,6 +11,7 @@ import '../src/routes/home/features/home_app_bar.dart';
 
 final GoRouter router = GoRouter(
   initialLocation: '/home',
+  debugLogDiagnostics: true,
   routes: [
     ShellRoute(
       builder: (context, GoRouterState state, child) {
@@ -22,6 +23,14 @@ final GoRouter router = GoRouter(
         }
 
         return ShellRouteWithNavigation(
+          appBar: AppBar(
+            leading: IconButton(
+              icon: const Icon(Icons.arrow_back_outlined),
+              onPressed: () {
+                context.pop();
+              },
+            ),
+          ),
           child: child,
         );
       },
@@ -43,14 +52,16 @@ final GoRouter router = GoRouter(
               const RegisterRoute(),
         ),
         GoRoute(
-          path: '/home',
-          builder: (BuildContext context, GoRouterState state) => HomeScreen(),
-        ),
-        GoRoute(
-          path: '/product-details',
-          builder: (BuildContext context, GoRouterState state) =>
-              const ProductDetailsRoute(),
-        )
+            path: '/home',
+            builder: (BuildContext context, GoRouterState state) =>
+                HomeScreen(),
+            routes: [
+              GoRoute(
+                path: 'product-details',
+                builder: (BuildContext context, GoRouterState state) =>
+                    const ProductDetailsScreen(),
+              )
+            ]),
       ],
     ),
   ],

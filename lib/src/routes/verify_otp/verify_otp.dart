@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:que_based_ecom_fe/src/api/verify_otp.dart';
-import 'package:que_based_ecom_fe/src/routes/home/home.dart';
 import 'package:que_based_ecom_fe/src/routes/register/register.dart';
 import 'package:que_based_ecom_fe/src/utils/write_token_to_secure_storage.dart';
 import 'package:que_based_ecom_fe/src/widgets/q_otp_fields.dart';
@@ -16,7 +15,7 @@ class VerifyOTPRoute extends StatelessWidget {
      * go back to the previous;
      * where user can enter the phone number
      */
-    Navigator.of(context).pop();
+    context.pop();
   }
 
   void _handleOnSubmit(BuildContext context, String otp) {
@@ -36,8 +35,7 @@ class VerifyOTPRoute extends StatelessWidget {
         context.go('/home');
       } else if (response.statusCode == 201) {
         // OTP verified
-        Navigator.of(context).pushReplacement(
-            MaterialPageRoute(builder: (context) => const RegisterRoute()));
+        context.go('/register');
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text(response.data['data']['message'])));
