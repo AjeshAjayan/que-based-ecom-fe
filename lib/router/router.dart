@@ -13,6 +13,20 @@ final GoRouter router = GoRouter(
   initialLocation: '/home',
   debugLogDiagnostics: true,
   routes: [
+    GoRoute(
+      path: '/login',
+      builder: (BuildContext context, GoRouterState state) => LoginRoute(),
+    ),
+    GoRoute(
+      path: '/verify-otp/:phoneNumber',
+      builder: (BuildContext context, GoRouterState state) => VerifyOTPRoute(
+        phoneNumber: state.pathParameters['phoneNumber'] ?? '',
+      ),
+    ),
+    GoRoute(
+      path: '/register',
+      builder: (BuildContext context, GoRouterState state) => RegisterRoute(),
+    ),
     ShellRoute(
       builder: (context, GoRouterState state, child) {
         if (state.fullPath == '/home') {
@@ -35,22 +49,6 @@ final GoRouter router = GoRouter(
         );
       },
       routes: [
-        GoRoute(
-          path: '/login',
-          builder: (BuildContext context, GoRouterState state) => LoginRoute(),
-        ),
-        GoRoute(
-          path: '/verify-otp/:phoneNumber',
-          builder: (BuildContext context, GoRouterState state) =>
-              VerifyOTPRoute(
-            phoneNumber: state.pathParameters['phoneNumber'] ?? '',
-          ),
-        ),
-        GoRoute(
-          path: '/register',
-          builder: (BuildContext context, GoRouterState state) =>
-              const RegisterRoute(),
-        ),
         GoRoute(
             path: '/home',
             builder: (BuildContext context, GoRouterState state) =>
