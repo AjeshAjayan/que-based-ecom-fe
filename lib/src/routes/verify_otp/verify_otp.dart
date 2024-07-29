@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:que_based_ecom_fe/src/api/verify_otp.dart';
-import 'package:que_based_ecom_fe/src/routes/register/register.dart';
 import 'package:que_based_ecom_fe/src/utils/write_token_to_secure_storage.dart';
 import 'package:que_based_ecom_fe/src/widgets/q_otp_fields.dart';
 
-class VerifyOTPRoute extends StatelessWidget {
-  const VerifyOTPRoute({super.key, required this.phoneNumber});
+class VerifyOTPScreen extends StatelessWidget {
+  const VerifyOTPScreen({super.key, required this.phoneNumber});
 
   final String phoneNumber;
 

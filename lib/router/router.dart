@@ -15,17 +15,18 @@ final GoRouter router = GoRouter(
   routes: [
     GoRoute(
       path: '/login',
-      builder: (BuildContext context, GoRouterState state) => LoginRoute(),
+      builder: (BuildContext context, GoRouterState state) => LoginScreen(),
     ),
     GoRoute(
       path: '/verify-otp/:phoneNumber',
-      builder: (BuildContext context, GoRouterState state) => VerifyOTPRoute(
+      builder: (BuildContext context, GoRouterState state) => VerifyOTPScreen(
         phoneNumber: state.pathParameters['phoneNumber'] ?? '',
       ),
     ),
     GoRoute(
       path: '/register',
-      builder: (BuildContext context, GoRouterState state) => RegisterRoute(),
+      builder: (BuildContext context, GoRouterState state) =>
+          const RegisterScreen(),
     ),
     ShellRoute(
       builder: (context, GoRouterState state, child) {

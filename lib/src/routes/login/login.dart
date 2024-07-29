@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:que_based_ecom_fe/src/api/send_otp.dart';
-import 'package:que_based_ecom_fe/src/routes/verify_otp/verify_otp.dart';
 
-class LoginRoute extends StatelessWidget {
-  LoginRoute({super.key});
+class LoginScreen extends StatelessWidget {
+  LoginScreen({super.key});
 
   final _formKey = GlobalKey<FormState>();
   final RegExp phoneRegex = RegExp(r'^[6789]\d{9}$');
