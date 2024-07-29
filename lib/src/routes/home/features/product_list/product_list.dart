@@ -5,6 +5,7 @@ import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:que_based_ecom_fe/src/api/get_all_moq_1_products.dart';
 import 'package:que_based_ecom_fe/src/api/get_all_products.dart';
 import 'package:que_based_ecom_fe/src/store/home_product_detail_store.dart';
+import 'package:que_based_ecom_fe/src/utils/find_all_medias_from_product.dart';
 import 'package:que_based_ecom_fe/src/widgets/q_product_media_carousel.dart';
 
 import '../../../../model/product/product.dart';
@@ -20,49 +21,6 @@ class _ProductListState extends State<ProductList> {
   @override
   void initState() {
     super.initState();
-  }
-
-  findAllImagesAndVideos(List<Product> products, int index) {
-    /**
-     * get images and videos from top level
-     */
-    final images = products[index]
-        .imagesAndVideos
-        .map((media) => media.image?.url ?? '')
-        .where((url) => url != '')
-        .toList();
-
-    final videos = products[index]
-        .imagesAndVideos
-        .map((media) => media.video?.url ?? '')
-        .where((url) => url != '')
-        .toList();
-    /**
-     * END: get images and videos from top level
-     */
-
-    /**
-     * get images and videos from all variant levels
-     */
-    products[index].variants?.asMap().entries.map((entries) {
-      final variant = entries.value;
-      final imageUrls = variant.imagesAndVideos
-          .map((media) => media.image?.url ?? '')
-          .where((url) => url != '')
-          .toList();
-      final videoUrls = variant.imagesAndVideos
-          .map((media) => media.video?.url ?? '')
-          .where((url) => url != '')
-          .toList();
-
-      images.addAll(imageUrls);
-      videos.addAll(videoUrls);
-    });
-    /**
-     * END: get images and videos from all variant levels
-     */
-
-    return [...videos, ...images];
   }
 
   // void _updateProducts(List<Product> products) {
@@ -125,7 +83,7 @@ class _ProductListState extends State<ProductList> {
             return ListView.builder(
               itemCount: listCount,
               itemBuilder: (context, index) {
-                final mediaURLs = findAllImagesAndVideos(products, index);
+                final mediaURLs = findAllMediasFromProduct(products[index]);
 
                 return GestureDetector(
                   onTap: () => _handleProductOnTap(products[index]),

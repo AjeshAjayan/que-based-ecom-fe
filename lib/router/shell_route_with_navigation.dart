@@ -12,17 +12,14 @@ class ShellRouteWithNavigation extends StatelessWidget {
     return Scaffold(
       appBar: appBar,
       body: SafeArea(
-        child: Container(
-          padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Expanded(
-                child: child,
-              ),
-              const QNavigationBar()
-            ],
-          ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Expanded(
+              child: child,
+            ),
+            const QNavigationBar()
+          ],
         ),
       ),
     );

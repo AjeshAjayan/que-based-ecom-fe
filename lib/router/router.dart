@@ -37,6 +37,12 @@ final GoRouter router = GoRouter(
           );
         }
 
+        if (state.fullPath == '/home/product-details') {
+          return ShellRouteWithNavigation(
+            child: child,
+          );
+        }
+
         return ShellRouteWithNavigation(
           appBar: AppBar(
             leading: IconButton(
