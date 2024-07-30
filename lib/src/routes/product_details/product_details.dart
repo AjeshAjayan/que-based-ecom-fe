@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:june/june.dart';
 import 'package:que_based_ecom_fe/src/routes/product_details/features/product_info.dart';
 import 'package:que_based_ecom_fe/src/store/home_product_detail_store.dart';
@@ -71,7 +70,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                   child: Container(
                     padding:
                         const EdgeInsets.only(left: 10, right: 10, top: 10),
-                    child: ProductInfo(),
+                    child: const ProductInfo(),
                   ),
                 )
               ],

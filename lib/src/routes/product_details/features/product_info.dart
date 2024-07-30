@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:june/june.dart';
 import 'package:que_based_ecom_fe/src/store/home_product_detail_store.dart';
+import 'package:que_based_ecom_fe/src/utils/get_days_ago.dart';
 
 class ProductInfo extends StatefulWidget {
   const ProductInfo({super.key});
@@ -37,7 +38,7 @@ class _ProductInfoState extends State<ProductInfo> {
                 ),
               ],
             ),
-            Text(state.selectedProduct?.productAddedDate ?? '')
+            Text(getDaysAgo(state.selectedProduct?.productAddedDate ?? ''))
           ],
         ),
       );
