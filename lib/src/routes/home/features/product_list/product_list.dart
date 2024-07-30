@@ -83,7 +83,8 @@ class _ProductListState extends State<ProductList> {
             return ListView.builder(
               itemCount: listCount,
               itemBuilder: (context, index) {
-                final mediaURLs = findAllMediasFromProduct(products[index]);
+                final media = findAllMediasFromProduct(products[index]);
+                final mediaURLs = [...media.images, ...media.videos];
 
                 return GestureDetector(
                   onTap: () => _handleProductOnTap(products[index]),

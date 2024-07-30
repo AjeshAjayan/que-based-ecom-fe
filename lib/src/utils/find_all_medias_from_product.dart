@@ -1,6 +1,16 @@
 import 'package:que_based_ecom_fe/src/model/product/product.dart';
 
-List<String> findAllMediasFromProduct(Product product) {
+class Media {
+  List<String> images;
+  List<String> videos;
+
+  Media({
+    required this.images,
+    required this.videos,
+  });
+}
+
+Media findAllMediasFromProduct(Product product) {
   /**
      * get images and videos from top level
      */
@@ -38,5 +48,5 @@ List<String> findAllMediasFromProduct(Product product) {
      * END: get images and videos from all variant levels
      */
 
-  return [...videos, ...images];
+  return Media(images: images, videos: videos);
 }

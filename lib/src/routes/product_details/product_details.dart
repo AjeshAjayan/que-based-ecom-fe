@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:june/june.dart';
+import 'package:que_based_ecom_fe/src/routes/product_details/features/product_images_detailed_view.dart';
 import 'package:que_based_ecom_fe/src/routes/product_details/features/product_info.dart';
+import 'package:que_based_ecom_fe/src/routes/product_details/features/product_video_detailed_view.dart';
 import 'package:que_based_ecom_fe/src/store/home_product_detail_store.dart';
 import 'package:que_based_ecom_fe/src/utils/find_all_medias_from_product.dart';
 import 'package:que_based_ecom_fe/src/widgets/q_product_media_carousel.dart';
@@ -13,7 +15,7 @@ class ProductDetailsScreen extends StatefulWidget {
 }
 
 class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
-  List<String> media = [];
+  List<String> mediaURLs = [];
 
   @override
   void initState() {
@@ -21,9 +23,10 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
         June.getState(() => HomeProductDetailStore());
 
     if (homeProductDetailStore.selectedProduct != null) {
+      final media =
+          findAllMediasFromProduct(homeProductDetailStore.selectedProduct!);
       setState(() {
-        media =
-            findAllMediasFromProduct(homeProductDetailStore.selectedProduct!);
+        mediaURLs = [...media.images, ...media.videos];
       });
     }
     super.initState();
@@ -57,13 +60,13 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                   title: top <= 80
                       ? Text(state.selectedProduct?.title ?? '')
                       : null,
-                  background: QProductMediaCarousel(mediaURLs: media));
+                  background: QProductMediaCarousel(mediaURLs: mediaURLs));
             });
           }),
         ),
         SliverToBoxAdapter(
           child: SizedBox(
-            height: 700,
+            height: 300,
             child: Column(
               children: [
                 Expanded(
@@ -76,7 +79,9 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
               ],
             ),
           ),
-        )
+        ),
+        const ProductImageDetailedView(),
+        const ProductVideoDetailedView(),
       ],
     );
   }
