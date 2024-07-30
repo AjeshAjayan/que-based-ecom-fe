@@ -4,9 +4,20 @@ import 'package:que_based_ecom_fe/src/constants.dart';
 import 'package:que_based_ecom_fe/src/widgets/q_product_video.dart';
 
 class QProductMediaCarousel extends StatefulWidget {
-  const QProductMediaCarousel({super.key, required this.mediaURLs});
+  const QProductMediaCarousel({
+    super.key,
+    required this.mediaURLs,
+    this.cover = true,
+    this.enlargeCenterPage = false,
+    this.viewportFraction = 1,
+    this.initialPage = 0,
+  });
 
   final List<String> mediaURLs;
+  final bool cover;
+  final bool enlargeCenterPage;
+  final double viewportFraction;
+  final int initialPage;
 
   @override
   State<QProductMediaCarousel> createState() => _QProductMediaCarouselState();
@@ -31,11 +42,12 @@ class _QProductMediaCarouselState extends State<QProductMediaCarousel> {
                     });
               }
               return Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Expanded(
                     child: Image.network(
                       assetUrl + url,
-                      fit: BoxFit.cover,
+                      fit: widget.cover ? BoxFit.cover : BoxFit.contain,
                     ),
                   ),
                 ],
@@ -44,11 +56,12 @@ class _QProductMediaCarouselState extends State<QProductMediaCarousel> {
           ).toList(),
           carouselController: _controller,
           options: CarouselOptions(
-            viewportFraction: 1,
+            initialPage: widget.initialPage,
+            viewportFraction: widget.viewportFraction,
             enableInfiniteScroll: false,
             autoPlay: false,
-            enlargeCenterPage: false,
-            aspectRatio: 1.33,
+            enlargeCenterPage: widget.enlargeCenterPage,
+            aspectRatio: widget.cover ? 1.33 : 0.8,
             onPageChanged: (index, reason) {
               _current = index;
 
