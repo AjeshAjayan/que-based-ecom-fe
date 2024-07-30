@@ -87,21 +87,8 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
             });
           }),
         ),
-        SliverToBoxAdapter(
-          child: SizedBox(
-            height: 300,
-            child: Column(
-              children: [
-                Expanded(
-                  child: Container(
-                    padding:
-                        const EdgeInsets.only(left: 10, right: 10, top: 10),
-                    child: const ProductInfo(),
-                  ),
-                )
-              ],
-            ),
-          ),
+        const SliverToBoxAdapter(
+          child: ProductInfo(),
         ),
         const ProductImageDetailedView(),
         const ProductVideoDetailedView(),
