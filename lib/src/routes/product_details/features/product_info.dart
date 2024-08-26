@@ -47,7 +47,7 @@ class _ProductInfoState extends State<ProductInfo> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    '${state.selectedProduct?.price != null ? '\$' : ''} ${state.selectedProduct?.price.toString() ?? ''}',
+                    '${state.selectedProduct?.price != null ? '₹' : ''} ${state.selectedProduct?.price.toString() ?? ''}',
                     style: const TextStyle(
                         fontSize: 24, fontWeight: FontWeight.bold),
                   ),

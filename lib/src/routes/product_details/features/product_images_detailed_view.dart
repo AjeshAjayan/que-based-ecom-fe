@@ -36,17 +36,25 @@ class _ProductImageDetailedViewState extends State<ProductImageDetailedView> {
       delegate: SliverChildBuilderDelegate(
         (BuildContext context, int index) {
           return Container(
+            margin: const EdgeInsets.only(top: 10, bottom: 10),
             padding: const EdgeInsets.only(left: 10, right: 10, top: 10),
-            child: AspectRatio(
-              aspectRatio: 16 / 9,
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  image: DecorationImage(
-                    image: NetworkImage(assetUrl + images[index]),
-                    fit: BoxFit.cover,
-                  ),
-                ),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(10.0),
+              child: Image.network(
+                assetUrl + images[index],
+                fit: BoxFit.cover,
+                loadingBuilder: (context, widget, imageChunkEvent) {
+                  if (imageChunkEvent == null) {
+                    return widget; // Return a blank space while loading the image.
+                  } // Return a blank space while loading the image.
+                  return const SizedBox(
+                    width: double.infinity,
+                    height: 86,
+                    child: Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                  );
+                },
               ),
             ),
           );
