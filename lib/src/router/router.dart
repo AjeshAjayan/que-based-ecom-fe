@@ -3,7 +3,10 @@ import 'package:go_router/go_router.dart';
 import 'package:que_based_ecom_fe/src/router/shell_route_with_navigation.dart';
 import 'package:que_based_ecom_fe/src/screens/home/home.dart';
 import 'package:que_based_ecom_fe/src/screens/login/login.dart';
+import 'package:que_based_ecom_fe/src/screens/my_trade/my_trade.dart';
+import 'package:que_based_ecom_fe/src/screens/orders/orders.dart';
 import 'package:que_based_ecom_fe/src/screens/product_details/product_details.dart';
+import 'package:que_based_ecom_fe/src/screens/profile/profile.dart';
 import 'package:que_based_ecom_fe/src/screens/register/register.dart';
 import 'package:que_based_ecom_fe/src/screens/verify_otp/verify_otp.dart';
 
@@ -57,16 +60,31 @@ final GoRouter router = GoRouter(
       },
       routes: [
         GoRoute(
-            path: '/home',
-            builder: (BuildContext context, GoRouterState state) =>
-                HomeScreen(),
-            routes: [
-              GoRoute(
-                path: 'product-details',
-                builder: (BuildContext context, GoRouterState state) =>
-                    const ProductDetailsScreen(),
-              )
-            ]),
+          path: '/home',
+          builder: (BuildContext context, GoRouterState state) => HomeScreen(),
+          routes: [
+            GoRoute(
+              path: 'product-details',
+              builder: (BuildContext context, GoRouterState state) =>
+                  const ProductDetailsScreen(),
+            )
+          ],
+        ),
+        GoRoute(
+          path: '/orders',
+          builder: (BuildContext context, GoRouterState state) =>
+              const OrdersScreen(),
+        ),
+        GoRoute(
+          path: '/my-trade',
+          builder: (BuildContext context, GoRouterState state) =>
+              const MyTradeScreen(),
+        ),
+        GoRoute(
+          path: '/profile',
+          builder: (BuildContext context, GoRouterState state) =>
+              const ProfileScreen(),
+        ),
       ],
     ),
   ],
