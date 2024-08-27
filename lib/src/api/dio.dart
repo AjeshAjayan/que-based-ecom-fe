@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:que_based_ecom_fe/src/constants.dart';
-import 'package:que_based_ecom_fe/src/routes/error/q_error.dart';
+import 'package:que_based_ecom_fe/src/screens/error/q_error.dart';
 import 'package:que_based_ecom_fe/src/utils/get_token_from_secure_storage.dart';
 
 class DioClient {

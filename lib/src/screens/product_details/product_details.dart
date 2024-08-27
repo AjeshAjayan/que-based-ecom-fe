@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:june/june.dart';
-import 'package:que_based_ecom_fe/src/routes/product_details/features/product_images_detailed_view.dart';
-import 'package:que_based_ecom_fe/src/routes/product_details/features/product_info.dart';
-import 'package:que_based_ecom_fe/src/routes/product_details/features/product_media_full_screen.dart';
-import 'package:que_based_ecom_fe/src/routes/product_details/features/product_video_detailed_view.dart';
+import 'package:que_based_ecom_fe/src/screens/product_details/features/product_images_detailed_view.dart';
+import 'package:que_based_ecom_fe/src/screens/product_details/features/product_info.dart';
+import 'package:que_based_ecom_fe/src/screens/product_details/features/product_media_full_screen.dart';
+import 'package:que_based_ecom_fe/src/screens/product_details/features/product_video_detailed_view.dart';
 import 'package:que_based_ecom_fe/src/store/home_product_detail_store.dart';
 import 'package:que_based_ecom_fe/src/utils/find_all_medias_from_product.dart';
 import 'package:que_based_ecom_fe/src/widgets/q_product_media_carousel.dart';

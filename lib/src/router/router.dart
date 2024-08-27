@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:que_based_ecom_fe/router/shell_route_with_navigation.dart';
-import 'package:que_based_ecom_fe/src/routes/home/home.dart';
-import 'package:que_based_ecom_fe/src/routes/login/login.dart';
-import 'package:que_based_ecom_fe/src/routes/product_details/product_details.dart';
-import 'package:que_based_ecom_fe/src/routes/register/register.dart';
-import 'package:que_based_ecom_fe/src/routes/verify_otp/verify_otp.dart';
+import 'package:que_based_ecom_fe/src/router/shell_route_with_navigation.dart';
+import 'package:que_based_ecom_fe/src/screens/home/home.dart';
+import 'package:que_based_ecom_fe/src/screens/login/login.dart';
+import 'package:que_based_ecom_fe/src/screens/product_details/product_details.dart';
+import 'package:que_based_ecom_fe/src/screens/register/register.dart';
+import 'package:que_based_ecom_fe/src/screens/verify_otp/verify_otp.dart';
 
-import '../src/routes/home/features/home_app_bar.dart';
+import '../screens/home/features/home_app_bar.dart';
 
 final GoRouter router = GoRouter(
   initialLocation: '/home',
