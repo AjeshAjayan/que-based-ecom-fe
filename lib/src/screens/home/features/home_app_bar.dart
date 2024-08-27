@@ -3,19 +3,34 @@ import 'package:june/june.dart';
 import 'package:que_based_ecom_fe/src/store/home_product_detail_store.dart';
 
 class HomeAppBar extends AppBar {
-  HomeAppBar({super.key, required this.onIsShopToggle});
+  HomeAppBar(
+      {super.key, required this.onIsShopToggle, required this.onSignInClick});
 
   final void Function(bool) onIsShopToggle;
+  final void Function() onSignInClick;
+
+  @override
+  Widget? get title => TextButton(
+        onPressed: onSignInClick,
+        child: const SizedBox(
+          width: 80,
+          child: Row(
+            children: [
+              Icon(Icons.login),
+              SizedBox(
+                width: 5,
+              ),
+              Text('Sign In'),
+            ],
+          ),
+        ),
+      );
 
   void shopOrWarehouseSwitchOnChanged(bool value) {
     HomeProductDetailStore state =
         June.getState(() => HomeProductDetailStore());
     state.toggleIsShop(value);
-    onIsShopToggle(value);
   }
-
-  @override
-  Widget? get title => const Text('Products');
 
   @override
   List<Widget>? get actions => [

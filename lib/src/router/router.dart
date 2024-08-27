@@ -40,6 +40,9 @@ final GoRouter router = GoRouter(
               onIsShopToggle: (value) {
                 fetchProducts(context, value);
               },
+              onSignInClick: () {
+                context.go('/login');
+              },
             ),
             child: child,
           );
