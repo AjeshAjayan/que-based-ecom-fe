@@ -44,6 +44,10 @@ class _ProductListState extends State<ProductList> {
     context.push('/home/product-details');
   }
 
+  Future<void> _handleOnRefresh() async {
+    await fetchProducts(context, null, ignoreLoadingState: true);
+  }
+
   @override
   Widget build(BuildContext context) {
     return JuneBuilder(() => HomeProductDetailStore(), builder: (state) {
@@ -63,106 +67,109 @@ class _ProductListState extends State<ProductList> {
         );
       }
 
-      return ListView.builder(
-        itemCount: state.products.length,
-        itemBuilder: (context, index) {
-          final media = findAllMediasFromProduct(state.products[index]);
-          final mediaURLs = [...media.images, ...media.videos];
+      return RefreshIndicator(
+        onRefresh: _handleOnRefresh,
+        child: ListView.builder(
+          itemCount: state.products.length,
+          itemBuilder: (context, index) {
+            final media = findAllMediasFromProduct(state.products[index]);
+            final mediaURLs = [...media.images, ...media.videos];
 
-          return GestureDetector(
-            onTap: () => _handleProductOnTap(state.products[index]),
-            child: Container(
-              margin: const EdgeInsets.symmetric(vertical: 10),
-              child: Card.outlined(
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(15),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Stack(
-                        children: [
-                          QProductMediaCarousel(
-                            mediaURLs: mediaURLs,
-                          ),
-                          Visibility(
-                            visible: state.products[index].moq > 1,
-                            child: Positioned(
-                              left: MediaQuery.of(context).size.width / 7,
-                              top: 10,
-                              child: LinearPercentIndicator(
-                                alignment: MainAxisAlignment.center,
-                                barRadius: const Radius.circular(10),
-                                width: 260.0,
-                                lineHeight: 20.0,
-                                center: Text(
-                                  'Que is filling ${state.products[index].moq - 5} more to go',
-                                  style: const TextStyle(color: Colors.black),
-                                ),
-                                percent: 0.5,
-                                backgroundColor:
-                                    const Color.fromARGB(255, 116, 116, 116),
-                                progressColor:
-                                    const Color.fromARGB(255, 109, 175, 32),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      Container(
-                        padding: const EdgeInsets.all(10),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            return GestureDetector(
+              onTap: () => _handleProductOnTap(state.products[index]),
+              child: Container(
+                margin: const EdgeInsets.symmetric(vertical: 10),
+                child: Card.outlined(
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(15),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Stack(
                           children: [
-                            Flexible(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    style: const TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                    state.products[index].title,
-                                  ),
-                                  const SizedBox(height: 5),
-                                  Visibility(
-                                    visible: state.products[index].moq > 1,
-                                    child: const Text('In Queue: 3'),
-                                  ),
-                                ],
-                              ),
+                            QProductMediaCarousel(
+                              mediaURLs: mediaURLs,
                             ),
-                            Container(
-                              margin: const EdgeInsets.only(left: 10),
-                              child: Column(
-                                children: [
-                                  Text(
-                                    style: const TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                    '₹${state.products[index].price}',
+                            Visibility(
+                              visible: state.products[index].moq > 1,
+                              child: Positioned(
+                                left: MediaQuery.of(context).size.width / 7,
+                                top: 10,
+                                child: LinearPercentIndicator(
+                                  alignment: MainAxisAlignment.center,
+                                  barRadius: const Radius.circular(10),
+                                  width: 260.0,
+                                  lineHeight: 20.0,
+                                  center: Text(
+                                    'Que is filling ${state.products[index].moq - 5} more to go',
+                                    style: const TextStyle(color: Colors.black),
                                   ),
-                                  const SizedBox(height: 5),
-                                  Visibility(
-                                    visible: state.products[index].moq > 1,
-                                    child: Text(
-                                      'MOQ: ${state.products[index].moq}',
-                                    ),
-                                  ),
-                                ],
+                                  percent: 0.5,
+                                  backgroundColor:
+                                      const Color.fromARGB(255, 116, 116, 116),
+                                  progressColor:
+                                      const Color.fromARGB(255, 109, 175, 32),
+                                ),
                               ),
                             ),
                           ],
                         ),
-                      )
-                    ],
+                        Container(
+                          padding: const EdgeInsets.all(10),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Flexible(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      style: const TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                      state.products[index].title,
+                                    ),
+                                    const SizedBox(height: 5),
+                                    Visibility(
+                                      visible: state.products[index].moq > 1,
+                                      child: const Text('In Queue: 3'),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Container(
+                                margin: const EdgeInsets.only(left: 10),
+                                child: Column(
+                                  children: [
+                                    Text(
+                                      style: const TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                      '₹${state.products[index].price}',
+                                    ),
+                                    const SizedBox(height: 5),
+                                    Visibility(
+                                      visible: state.products[index].moq > 1,
+                                      child: Text(
+                                        'MOQ: ${state.products[index].moq}',
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ),
-            ),
-          );
-        },
+            );
+          },
+        ),
       );
     });
   }

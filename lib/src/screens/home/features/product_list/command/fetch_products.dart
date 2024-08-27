@@ -6,13 +6,19 @@ import 'package:que_based_ecom_fe/src/model/paginated/paginated.dart';
 import 'package:que_based_ecom_fe/src/model/product/product.dart';
 import 'package:que_based_ecom_fe/src/store/home_product_detail_store.dart';
 
-Future<void> fetchProducts(BuildContext context, bool? isShop) async {
+Future<void> fetchProducts(
+  BuildContext context,
+  bool? isShop, {
+  bool? ignoreLoadingState,
+}) async {
   final state = June.getState(() => HomeProductDetailStore());
 
   try {
     Paginated<Product>? products;
 
-    state.updateIsLoading(true);
+    if (!(ignoreLoadingState ?? false)) {
+      state.updateIsLoading(true);
+    }
 
     if (state.isShop || (isShop ?? false)) {
       final response = await getAllMOQ1Products(context);
