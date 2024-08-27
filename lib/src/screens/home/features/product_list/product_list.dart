@@ -17,17 +17,25 @@ class ProductList extends StatefulWidget {
 }
 
 class _ProductListState extends State<ProductList> {
+  final homeProductDetailState = June.getState(() => HomeProductDetailStore());
   @override
   void initState() {
-    fetchProducts(context, null);
+    /**
+     * call API if product is empty. This is a simple
+     * caching mechanism. The caching is happening in the store
+     * itself.
+     */
+    if (homeProductDetailState.products.isEmpty) {
+      fetchProducts(context, null);
+    }
     super.initState();
   }
 
   void _updateSelectedProduct(Product product) {
-    final homeProductDetailStore =
+    final homeProductDetailState =
         June.getState(() => HomeProductDetailStore());
 
-    homeProductDetailStore.updateSelectedProduct(product);
+    homeProductDetailState.updateSelectedProduct(product);
   }
 
   void _handleProductOnTap(Product product) {

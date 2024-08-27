@@ -11,6 +11,12 @@ class ShellRouteWithNavigation extends StatelessWidget {
   final AppBar? appBar;
 
   void _handleOnDestinationSelected(int selectedIndex, BuildContext context) {
+    final state = June.getState(() => ShellRouteWithNavigationStore());
+
+    if (state.selectedIndex == selectedIndex) {
+      return;
+    }
+
     switch (selectedIndex) {
       case 0:
         context.go('/home');
@@ -26,7 +32,6 @@ class ShellRouteWithNavigation extends StatelessWidget {
         break;
     }
 
-    final state = June.getState(() => ShellRouteWithNavigationStore());
     state.updateSelectedIndex(selectedIndex);
   }
 

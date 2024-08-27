@@ -8,6 +8,7 @@ import 'package:que_based_ecom_fe/src/store/home_product_detail_store.dart';
 
 Future<void> fetchProducts(BuildContext context, bool? isShop) async {
   final state = June.getState(() => HomeProductDetailStore());
+
   try {
     Paginated<Product>? products;
 
