@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:june/june.dart';
+import 'package:que_based_ecom_fe/src/screens/product_details/features/but_now_button.dart';
 import 'package:que_based_ecom_fe/src/screens/product_details/features/product_images_detailed_view.dart';
 import 'package:que_based_ecom_fe/src/screens/product_details/features/product_info.dart';
 import 'package:que_based_ecom_fe/src/screens/product_details/features/product_media_full_screen.dart';
@@ -56,42 +57,47 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return CustomScrollView(
-      physics: const AlwaysScrollableScrollPhysics(),
-      slivers: [
-        SliverAppBar(
-          pinned: true,
-          stretch: true,
-          expandedHeight: 320,
-          actions: [
-            IconButton(
-              onPressed: _handleFullScreenOnPress,
-              icon: const Icon(Icons.fullscreen),
+    return Stack(
+      children: [
+        CustomScrollView(
+          physics: const AlwaysScrollableScrollPhysics(),
+          slivers: [
+            SliverAppBar(
+              pinned: true,
+              stretch: true,
+              expandedHeight: 320,
+              actions: [
+                IconButton(
+                  onPressed: _handleFullScreenOnPress,
+                  icon: const Icon(Icons.fullscreen),
+                ),
+              ],
+              flexibleSpace: LayoutBuilder(builder: (context, constraints) {
+                double top = constraints.biggest.height;
+                return JuneBuilder(() => HomeProductDetailStore(),
+                    builder: (state) {
+                  return FlexibleSpaceBar(
+                      title: top <= 80
+                          ? SizedBox(
+                              width: MediaQuery.of(context).size.width - 120,
+                              child: Text(
+                                state.selectedProduct?.title ?? '',
+                                softWrap: false,
+                              ),
+                            )
+                          : null,
+                      background: QProductMediaCarousel(mediaURLs: mediaURLs));
+                });
+              }),
             ),
+            const SliverToBoxAdapter(
+              child: ProductInfo(),
+            ),
+            const ProductImageDetailedView(),
+            const ProductVideoDetailedView(),
           ],
-          flexibleSpace: LayoutBuilder(builder: (context, constraints) {
-            double top = constraints.biggest.height;
-            return JuneBuilder(() => HomeProductDetailStore(),
-                builder: (state) {
-              return FlexibleSpaceBar(
-                  title: top <= 80
-                      ? SizedBox(
-                          width: MediaQuery.of(context).size.width - 120,
-                          child: Text(
-                            state.selectedProduct?.title ?? '',
-                            softWrap: false,
-                          ),
-                        )
-                      : null,
-                  background: QProductMediaCarousel(mediaURLs: mediaURLs));
-            });
-          }),
         ),
-        const SliverToBoxAdapter(
-          child: ProductInfo(),
-        ),
-        const ProductImageDetailedView(),
-        const ProductVideoDetailedView(),
+        const BuyNowButton(),
       ],
     );
   }
