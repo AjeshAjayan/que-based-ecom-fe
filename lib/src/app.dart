@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:que_based_ecom_fe/src/router/router.dart';
-import 'package:que_based_ecom_fe/src/screens/home/home.dart';
-import 'package:go_router/go_router.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({

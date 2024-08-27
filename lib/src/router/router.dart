@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:que_based_ecom_fe/src/router/shell_route_with_navigation.dart';
+import 'package:que_based_ecom_fe/src/screens/home/features/product_list/command/fetch_products.dart';
 import 'package:que_based_ecom_fe/src/screens/home/home.dart';
 import 'package:que_based_ecom_fe/src/screens/login/login.dart';
 import 'package:que_based_ecom_fe/src/screens/my_trade/my_trade.dart';
@@ -35,7 +36,11 @@ final GoRouter router = GoRouter(
       builder: (context, GoRouterState state, child) {
         if (state.fullPath == '/home') {
           return ShellRouteWithNavigation(
-            appBar: HomeAppBar(),
+            appBar: HomeAppBar(
+              onIsShopToggle: (value) {
+                fetchProducts(context, value);
+              },
+            ),
             child: child,
           );
         }
@@ -61,7 +66,8 @@ final GoRouter router = GoRouter(
       routes: [
         GoRoute(
           path: '/home',
-          builder: (BuildContext context, GoRouterState state) => HomeScreen(),
+          builder: (BuildContext context, GoRouterState state) =>
+              const HomeScreen(),
           routes: [
             GoRoute(
               path: 'product-details',

@@ -41,14 +41,16 @@ class ShellRouteWithNavigation extends StatelessWidget {
             Expanded(
               child: child,
             ),
-            JuneBuilder(() => ShellRouteWithNavigationStore(),
-                builder: (state) {
-              return QNavigationBar(
-                selectedIndex: state.selectedIndex,
-                onDestinationSelected: (index) =>
-                    _handleOnDestinationSelected(index, context),
-              );
-            })
+            JuneBuilder(
+              () => ShellRouteWithNavigationStore(),
+              builder: (state) {
+                return QNavigationBar(
+                  selectedIndex: state.selectedIndex,
+                  onDestinationSelected: (index) =>
+                      _handleOnDestinationSelected(index, context),
+                );
+              },
+            )
           ],
         ),
       ),

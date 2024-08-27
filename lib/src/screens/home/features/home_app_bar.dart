@@ -3,12 +3,15 @@ import 'package:june/june.dart';
 import 'package:que_based_ecom_fe/src/store/home_product_detail_store.dart';
 
 class HomeAppBar extends AppBar {
-  HomeAppBar({super.key});
+  HomeAppBar({super.key, required this.onIsShopToggle});
+
+  final void Function(bool) onIsShopToggle;
 
   void shopOrWarehouseSwitchOnChanged(bool value) {
     HomeProductDetailStore state =
         June.getState(() => HomeProductDetailStore());
     state.toggleIsShop(value);
+    onIsShopToggle(value);
   }
 
   @override
