@@ -14,7 +14,7 @@ import 'package:que_based_ecom_fe/src/screens/verify_otp/verify_otp.dart';
 import '../screens/home/features/home_app_bar.dart';
 
 final GoRouter router = GoRouter(
-  initialLocation: '/home',
+  initialLocation: '/register',
   debugLogDiagnostics: true,
   routes: [
     GoRoute(
@@ -29,8 +29,7 @@ final GoRouter router = GoRouter(
     ),
     GoRoute(
       path: '/register',
-      builder: (BuildContext context, GoRouterState state) =>
-          const RegisterScreen(),
+      builder: (BuildContext context, GoRouterState state) => RegisterScreen(),
     ),
     ShellRoute(
       builder: (context, GoRouterState state, child) {
