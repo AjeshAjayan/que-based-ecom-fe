@@ -45,7 +45,10 @@ final GoRouter router = GoRouter(
           );
         }
 
-        if (state.fullPath == '/home/product-details') {
+        if (state.fullPath == '/home/product-details' ||
+            state.fullPath == '/orders' ||
+            state.fullPath == '/profile' ||
+            state.fullPath == '/my-trade') {
           return ShellRouteWithNavigation(
             child: child,
           );
