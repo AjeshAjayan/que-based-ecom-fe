@@ -10,21 +10,23 @@ class HomeAppBar extends AppBar {
   final void Function() onSignInClick;
 
   @override
-  Widget? get title => TextButton(
-        onPressed: onSignInClick,
-        child: const SizedBox(
-          width: 80,
-          child: Row(
-            children: [
-              Icon(Icons.login),
-              SizedBox(
-                width: 5,
-              ),
-              Text('Sign In'),
-            ],
+  List<Widget>? get actions => [
+        TextButton(
+          onPressed: onSignInClick,
+          child: const SizedBox(
+            width: 80,
+            child: Row(
+              children: [
+                Icon(Icons.login),
+                SizedBox(
+                  width: 5,
+                ),
+                Text('Sign In'),
+              ],
+            ),
           ),
-        ),
-      );
+        )
+      ];
 
   void shopOrWarehouseSwitchOnChanged(bool value) {
     HomeProductDetailStore state =
@@ -33,24 +35,23 @@ class HomeAppBar extends AppBar {
   }
 
   @override
-  List<Widget>? get actions => [
-        Container(
-          margin: const EdgeInsets.only(right: 15),
-          child: JuneBuilder(
-            () => HomeProductDetailStore(),
-            builder: (state) => Row(
-              children: [
-                Switch(
-                  value: state.isShop,
-                  onChanged: shopOrWarehouseSwitchOnChanged,
-                  inactiveTrackColor: Colors.pink.shade900,
-                  thumbColor: WidgetStateProperty.all(Colors.black),
-                  activeColor: Colors.greenAccent,
-                ),
-                Icon(state.isShop ? Icons.store : Icons.warehouse),
-              ],
-            ),
+  Widget? get title => Container(
+        margin: const EdgeInsets.only(right: 15),
+        child: JuneBuilder(
+          () => HomeProductDetailStore(),
+          builder: (state) => Row(
+            children: [
+              Icon(state.isShop ? Icons.store : Icons.warehouse),
+              const SizedBox(width: 5),
+              Switch(
+                value: state.isShop,
+                onChanged: shopOrWarehouseSwitchOnChanged,
+                inactiveTrackColor: Colors.pink.shade900,
+                thumbColor: WidgetStateProperty.all(Colors.black),
+                activeColor: Colors.greenAccent,
+              ),
+            ],
           ),
-        )
-      ];
+        ),
+      );
 }
