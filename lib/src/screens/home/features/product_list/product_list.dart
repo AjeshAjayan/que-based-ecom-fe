@@ -49,6 +49,12 @@ class _ProductListState extends State<ProductList> {
         );
       }
 
+      if (state.hasError) {
+        return const Center(
+          child: Text('Something went wrong'),
+        );
+      }
+
       return ListView.builder(
         itemCount: state.products.length,
         itemBuilder: (context, index) {

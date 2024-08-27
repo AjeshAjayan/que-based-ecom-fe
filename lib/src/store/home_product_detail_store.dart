@@ -6,20 +6,27 @@ class HomeProductDetailStore extends JuneState {
   bool isLoading = false;
   List<Product> products = [];
   Product? selectedProduct;
+  bool hasError = false;
+
+  void updateHasError(bool hasErrorArg) {
+    isLoading = !hasErrorArg;
+    hasError = hasErrorArg;
+    setState();
+  }
 
   updateIsLoading(bool isLoadingArg) {
     isLoading = isLoadingArg;
     setState();
   }
 
-  updateProductsAndLoading(List<Product> products, bool isLoadingArg) {
+  updateProductsAndLoading(List<Product> productsArg, bool isLoadingArg) {
     isLoading = isLoadingArg;
-    products = products;
+    products = productsArg;
     setState();
   }
 
-  updateSelectedProduct(Product? product) {
-    selectedProduct = product;
+  updateSelectedProduct(Product? productArg) {
+    selectedProduct = productArg;
     setState();
   }
 

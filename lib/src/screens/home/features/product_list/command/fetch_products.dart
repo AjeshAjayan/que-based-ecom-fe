@@ -7,17 +7,22 @@ import 'package:que_based_ecom_fe/src/model/product/product.dart';
 import 'package:que_based_ecom_fe/src/store/home_product_detail_store.dart';
 
 Future<void> fetchProducts(BuildContext context, bool? isShop) async {
-  Paginated<Product>? products;
   final state = June.getState(() => HomeProductDetailStore());
+  try {
+    Paginated<Product>? products;
 
-  state.updateIsLoading(true);
+    state.updateIsLoading(true);
 
-  if (state.isShop || (isShop ?? false)) {
-    final response = await getAllMOQ1Products(context);
-    products = response.data;
-  } else {
-    final response = await getAllProducts(context);
-    products = response.data;
+    if (state.isShop || (isShop ?? false)) {
+      final response = await getAllMOQ1Products(context);
+      products = response.data;
+    } else {
+      final response = await getAllProducts(context);
+      products = response.data;
+    }
+    state.updateProductsAndLoading(products?.docs ?? [], false);
+  } catch (e) {
+    state.updateHasError(true);
+    print('Error fetching products: $e');
   }
-  state.updateProductsAndLoading(products?.docs ?? [], false);
 }
