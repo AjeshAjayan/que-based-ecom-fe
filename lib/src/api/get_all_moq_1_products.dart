@@ -8,8 +8,7 @@ typedef OnCompleteFunction = void Function(
     Response<Paginated<Product>> responseWithPaginatedProducts);
 
 Future<Response<Paginated<Product>>> getAllMOQ1Products(
-    BuildContext buildContext,
-    {OnCompleteFunction? onComplete}) async {
+    BuildContext buildContext) async {
   try {
     final dioClient = DioClient(buildContext);
 
@@ -26,10 +25,6 @@ Future<Response<Paginated<Product>>> getAllMOQ1Products(
       data: paginatedProducts,
       requestOptions: response.requestOptions,
     );
-
-    if (onComplete != null) {
-      onComplete(responseWithPaginatedProducts);
-    }
 
     return responseWithPaginatedProducts;
   } catch (e) {

@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:que_based_ecom_fe/src/constants.dart';
 import 'package:que_based_ecom_fe/src/screens/error/q_error.dart';
 import 'package:que_based_ecom_fe/src/utils/get_token_from_secure_storage.dart';
@@ -25,6 +26,17 @@ class DioClient {
             'Bearer $getTokenFromSecureStorage()';
         return handler.next(options);
       }, onResponse: (Response response, ResponseInterceptorHandler handler) {
+        if (response.statusCode == 401) {
+          // handle token expired or invalid
+          // navigate to login page
+          buildContext.go('/login');
+          // TODO: show message or snackbar
+          // ScaffoldMessenger.of(buildContext).showSnackBar(
+          //   SnackBar(
+          //     content: Text('Please sign in to '),
+          //   ),
+          // );
+        }
         return handler.next(response);
       }, onError: (DioException exception, ErrorInterceptorHandler handler) {
         Navigator.of(buildContext).push(

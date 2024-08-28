@@ -34,7 +34,7 @@ class VerifyOTPScreen extends StatelessWidget {
         context.go('/home');
       } else if (response.statusCode == 201) {
         // OTP verified
-        context.go('/register');
+        context.go('/register/$phoneNumber');
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text(response.data['data']['message'])));

@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
+import 'package:que_based_ecom_fe/src/api/register_user.dart';
 import 'package:que_based_ecom_fe/src/constants.dart';
+import 'package:que_based_ecom_fe/src/utils/write_token_to_secure_storage.dart';
 
 class RegisterScreen extends StatelessWidget {
-  RegisterScreen({super.key});
+  RegisterScreen({super.key, required this.phoneNumber});
+
+  final String phoneNumber;
 
   final TextEditingController _firstNameController = TextEditingController();
   final TextEditingController _lastNameController = TextEditingController();
@@ -54,20 +59,39 @@ class RegisterScreen extends StatelessWidget {
     return null;
   }
 
-  Future<void> _handleRegistration() async {
+  Future<void> _handleRegistration(BuildContext context) async {
     if (_formState.currentState?.validate() ?? false) {
       final firstName = _firstNameController.text.trim();
       final lastName = _lastNameController.text.trim();
-      final dateOfBirth = DateTime.parse(_dateController.text);
+      final dateOfBirth = _dateController.text;
       final email = _emailController.text.trim();
 
-      // TODO: Perform server-side validation and registration logic here
-      // For example:
-      // await _registerUser(firstName, lastName, dateOfBirth, email);
+      final response = await registerUser(
+        context,
+        phoneNumber: phoneNumber,
+        email: email,
+        firstName: firstName,
+        lastName: lastName,
+        dob: dateOfBirth,
+      );
 
-      // Navigate to the next screen or handle the registration result
-      // For example:
-      // Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen()));
+      writeTokenToSecureStorage(response.data?.token ?? '');
+
+      if (response.statusCode == 201) {
+        // user registered successfully
+        if (context.mounted) {
+          context.go('/home');
+        }
+      } else if (response.statusCode == 403) {
+        // OTP invalid
+        if (context.mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('Please sign in to '),
+            ),
+          );
+        }
+      }
     }
   }
 
@@ -131,7 +155,7 @@ class RegisterScreen extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 28),
                   child: ElevatedButton.icon(
-                    onPressed: _handleRegistration,
+                    onPressed: () => _handleRegistration(context),
                     icon: const Icon(Icons.login),
                     label: const Text('Let\'s go!'),
                   ),
