@@ -87,7 +87,7 @@ class RegisterScreen extends StatelessWidget {
         if (context.mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text('Please sign in to '),
+              content: Text('response.data'),
             ),
           );
         }
