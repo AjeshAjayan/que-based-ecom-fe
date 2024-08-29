@@ -14,7 +14,7 @@ import 'package:que_based_ecom_fe/src/screens/verify_otp/verify_otp.dart';
 import '../screens/home/features/home_app_bar.dart';
 
 final GoRouter router = GoRouter(
-  initialLocation: '/register/9544718663',
+  initialLocation: '/home',
   debugLogDiagnostics: true,
   routes: [
     GoRoute(

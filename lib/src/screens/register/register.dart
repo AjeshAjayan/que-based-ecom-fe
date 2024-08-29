@@ -75,10 +75,9 @@ class RegisterScreen extends StatelessWidget {
         dob: dateOfBirth,
       );
 
-      writeTokenToSecureStorage(response.data?.token ?? '');
-
       if (response.statusCode == 201) {
         // user registered successfully
+        writeTokenToSecureStorage(response.data['data']['token'] ?? '');
         if (context.mounted) {
           context.go('/home');
         }
@@ -87,7 +86,7 @@ class RegisterScreen extends StatelessWidget {
         if (context.mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text('response.data'),
+              content: Text(response.data['error']),
             ),
           );
         }
