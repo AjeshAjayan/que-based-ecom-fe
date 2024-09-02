@@ -40,6 +40,7 @@ class HomeAppBar extends AppBar {
     HomeProductDetailStore state =
         June.getState(() => HomeProductDetailStore());
     state.toggleIsShop(value);
+    onIsShopToggle(value);
   }
 
   @override
