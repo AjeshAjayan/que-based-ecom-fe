@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:june/june.dart';
 import 'package:que_based_ecom_fe/src/router/shell_route_with_navigation.dart';
 import 'package:que_based_ecom_fe/src/screens/home/features/product_list/command/fetch_products.dart';
 import 'package:que_based_ecom_fe/src/screens/home/home.dart';
@@ -10,6 +11,7 @@ import 'package:que_based_ecom_fe/src/screens/product_details/product_details.da
 import 'package:que_based_ecom_fe/src/screens/profile/profile.dart';
 import 'package:que_based_ecom_fe/src/screens/register/register.dart';
 import 'package:que_based_ecom_fe/src/screens/verify_otp/verify_otp.dart';
+import 'package:que_based_ecom_fe/src/store/profile_store.dart';
 
 import '../screens/home/features/home_app_bar.dart';
 

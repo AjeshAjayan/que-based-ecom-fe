@@ -4,18 +4,32 @@ import 'package:intl/intl.dart';
 import 'package:que_based_ecom_fe/src/api/register_user.dart';
 import 'package:que_based_ecom_fe/src/constants.dart';
 import 'package:que_based_ecom_fe/src/utils/write_token_to_secure_storage.dart';
+import 'package:que_based_ecom_fe/src/widgets/q_button_primary.dart';
 
-class RegisterScreen extends StatelessWidget {
-  RegisterScreen({super.key, required this.phoneNumber});
+class RegisterScreen extends StatefulWidget {
+  const RegisterScreen({super.key, required this.phoneNumber});
 
   final String phoneNumber;
 
+  @override
+  State<RegisterScreen> createState() => _RegisterScreenState();
+}
+
+class _RegisterScreenState extends State<RegisterScreen> {
+  bool isLoading = false;
+
   final TextEditingController _firstNameController = TextEditingController();
+
   final TextEditingController _lastNameController = TextEditingController();
+
   final TextEditingController _dateController = TextEditingController();
+
   final TextEditingController _emailController = TextEditingController();
 
   final GlobalKey<FormState> _formState = GlobalKey<FormState>();
+
+  void _handleIsLoading(bool isLoadingArg) =>
+      setState(() => isLoading = isLoadingArg);
 
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? date = await showDatePicker(
@@ -26,7 +40,7 @@ class RegisterScreen extends StatelessWidget {
       helpText: 'When was it!',
     );
     if (date != null) {
-      _dateController.text = DateFormat('dd-MM-yyyy').format(date);
+      _dateController.text = DateFormat('MM-dd-yyyy').format(date);
       date.toString();
     }
   }
@@ -61,35 +75,41 @@ class RegisterScreen extends StatelessWidget {
 
   Future<void> _handleRegistration(BuildContext context) async {
     if (_formState.currentState?.validate() ?? false) {
+      _handleIsLoading(true);
       final firstName = _firstNameController.text.trim();
       final lastName = _lastNameController.text.trim();
       final dateOfBirth = _dateController.text;
       final email = _emailController.text.trim();
 
-      final response = await registerUser(
-        context,
-        phoneNumber: phoneNumber,
-        email: email,
-        firstName: firstName,
-        lastName: lastName,
-        dob: dateOfBirth,
-      );
+      try {
+        final response = await registerUser(
+          context,
+          phoneNumber: widget.phoneNumber,
+          email: email,
+          firstName: firstName,
+          lastName: lastName,
+          dob: dateOfBirth,
+        );
 
-      if (response.statusCode == 201) {
-        // user registered successfully
-        writeTokenToSecureStorage(response.data['data']['token'] ?? '');
-        if (context.mounted) {
-          context.go('/home');
+        if (response.statusCode == 201) {
+          // user registered successfully
+          writeTokenToSecureStorage(response.data['data']['token'] ?? '');
+          if (context.mounted) {
+            context.go('/home');
+          }
+        } else if (response.statusCode == 403) {
+          // OTP is not validated - in case if the user by-passed OTP verification
+          if (context.mounted) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(response.data['error']),
+              ),
+            );
+          }
         }
-      } else if (response.statusCode == 403) {
-        // OTP invalid
-        if (context.mounted) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text(response.data['error']),
-            ),
-          );
-        }
+        _handleIsLoading(false);
+      } catch (e) {
+        _handleIsLoading(false);
       }
     }
   }
@@ -152,13 +172,13 @@ class RegisterScreen extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 28),
-                  child: ElevatedButton.icon(
-                    onPressed: () => _handleRegistration(context),
-                    icon: const Icon(Icons.login),
-                    label: const Text('Let\'s go!'),
-                  ),
-                )
+                    padding: const EdgeInsets.symmetric(vertical: 28),
+                    child: QButtonPrimary(
+                      onPressed: () => _handleRegistration(context),
+                      icon: const Icon(Icons.login),
+                      label: 'Let\'s go!',
+                      loading: isLoading,
+                    ))
               ],
             ),
           ),

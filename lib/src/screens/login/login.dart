@@ -1,16 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:que_based_ecom_fe/src/api/send_otp.dart';
+import 'package:que_based_ecom_fe/src/widgets/q_button_primary.dart';
 
-class LoginScreen extends StatelessWidget {
-  LoginScreen({super.key});
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
 
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
+
   final RegExp phoneRegex = RegExp(r'^[6789]\d{9}$');
+
   final TextEditingController _textEditingController = TextEditingController();
+
+  bool isLoading = false;
+
+  void _handleIsLoading(bool isLoadingArg) =>
+      setState(() => isLoading = isLoadingArg);
 
   void _handleLoginPress(BuildContext context) {
     if (_formKey.currentState!.validate()) {
+      _handleIsLoading(true);
+
       // call login API
       sendOTP(_textEditingController.text, context).then((response) {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -18,7 +33,10 @@ class LoginScreen extends StatelessWidget {
             content: Text(response['message']),
           ),
         );
+        _handleIsLoading(false);
         _gotoVerifyOTP(context);
+      }).catchError((e) {
+        _handleIsLoading(false);
       });
     }
   }
@@ -74,9 +92,10 @@ class LoginScreen extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 10),
-            ElevatedButton(
+            QButtonPrimary(
               onPressed: () => _handleLoginPress(context),
-              child: const Text('Login'),
+              icon: const Icon(Icons.login),
+              label: 'Login',
             ),
           ],
         ),

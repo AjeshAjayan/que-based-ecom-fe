@@ -20,10 +20,10 @@ class DioClient {
   void _addInterceptors() {
     _actualDio.interceptors.add(
       InterceptorsWrapper(onRequest:
-          (RequestOptions options, RequestInterceptorHandler handler) {
+          (RequestOptions options, RequestInterceptorHandler handler) async {
         // add authentication token to request header
         options.headers['Authorization'] =
-            'Bearer $getTokenFromSecureStorage()';
+            'Bearer ${await getTokenFromSecureStorage()}';
         return handler.next(options);
       }, onResponse: (Response response, ResponseInterceptorHandler handler) {
         if (response.statusCode == 401) {

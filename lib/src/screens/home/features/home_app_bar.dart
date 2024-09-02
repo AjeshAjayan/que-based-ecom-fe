@@ -1,31 +1,39 @@
 import 'package:flutter/material.dart';
 import 'package:june/june.dart';
 import 'package:que_based_ecom_fe/src/store/home_product_detail_store.dart';
+import 'package:que_based_ecom_fe/src/store/profile_store.dart';
 
 class HomeAppBar extends AppBar {
-  HomeAppBar(
-      {super.key, required this.onIsShopToggle, required this.onSignInClick});
+  HomeAppBar({
+    super.key,
+    required this.onIsShopToggle,
+    required this.onSignInClick,
+  });
 
   final void Function(bool) onIsShopToggle;
   final void Function() onSignInClick;
 
   @override
   List<Widget>? get actions => [
-        TextButton(
-          onPressed: onSignInClick,
-          child: const SizedBox(
-            width: 80,
-            child: Row(
-              children: [
-                Icon(Icons.login),
-                SizedBox(
-                  width: 5,
-                ),
-                Text('Sign In'),
-              ],
-            ),
-          ),
-        )
+        JuneBuilder(() => ProfileStore(), builder: (state) {
+          return !state.isSignedIn
+              ? TextButton(
+                  onPressed: onSignInClick,
+                  child: const SizedBox(
+                    width: 80,
+                    child: Row(
+                      children: [
+                        Icon(Icons.login),
+                        SizedBox(
+                          width: 5,
+                        ),
+                        Text('Sign In'),
+                      ],
+                    ),
+                  ),
+                )
+              : const SizedBox.shrink();
+        })
       ];
 
   void shopOrWarehouseSwitchOnChanged(bool value) {
