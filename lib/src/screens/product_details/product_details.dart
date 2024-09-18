@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:june/june.dart';
 import 'package:que_based_ecom_fe/src/screens/product_details/features/but_now_button.dart';
+import 'package:que_based_ecom_fe/src/screens/product_details/features/order_details_chart.dart';
 import 'package:que_based_ecom_fe/src/screens/product_details/features/product_images_detailed_view.dart';
 import 'package:que_based_ecom_fe/src/screens/product_details/features/product_info.dart';
 import 'package:que_based_ecom_fe/src/screens/product_details/features/product_media_full_screen.dart';
@@ -93,6 +94,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
             const SliverToBoxAdapter(
               child: ProductInfo(),
             ),
+            OrderDetailsChart(),
             const ProductImageDetailedView(),
             const ProductVideoDetailedView(),
           ],
